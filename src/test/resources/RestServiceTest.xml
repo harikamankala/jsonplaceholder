@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="FreeNowTestSuite">
+<test name="Get userId of a user">
+		<classes>
+			<class name="test.AllTests" />
+		</classes>
+	</test>
+</suite>
