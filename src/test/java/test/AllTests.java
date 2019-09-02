@@ -3,6 +3,8 @@ package test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+
+import api.GetPostsByUserId;
 import api.GetUsers;
 import constants.Constants;
 import static io.restassured.RestAssured.baseURI;
@@ -18,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class AllTests {
 	
 	GetUsers getUsers = new GetUsers();
+	GetPostsByUserId getPostsByUserId = new GetPostsByUserId();
 	
 	@BeforeClass
 	public void setUp() {		
@@ -29,5 +32,7 @@ public class AllTests {
 		getUsers.getUsersAPI();
 		assertThat("Verify GET /users API Response code", getUsers.getUsersAPIResponseCode(), equalTo(200));
 		Reporter.log("userId of Samantha : " + getUsers.getUserIdOfUser("Samantha"));	
+		getPostsByUserId.getPostsByUserIdAPI(getUsers.getUserIdOfUser("Samantha"));
+		Reporter.log("List of Post Ids : " + getPostsByUserId.getPostIdsOfUser());
 	}
 }
