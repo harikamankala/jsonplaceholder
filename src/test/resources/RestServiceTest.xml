@@ -1,8 +1,23 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="FreeNowTestSuite">
-<test name="Get userId of a user">
+	<test name="Validate the email format of the emails in Comments of a Posts of a user named 'Samantha'">
 		<classes>
-			<class name="test.AllTests" />
+			<class name="test.ValidateEmailFormatTest" />
+		</classes>
+	</test>
+	<test name="Validate GET Users API">
+		<classes>
+			<class name="test.GetUserDetailsTest" />
+		</classes>
+	</test>
+	<test name="Validate GET Posts by UserId API">
+		<classes>
+			<class name="test.GetPostsByUserIdTest" />
+		</classes>
+	</test>
+	<test name="Validate GET Comments by PostId API">
+		<classes>
+			<class name="test.GetCommentsByPostIdTest" />
 		</classes>
 	</test>
 </suite>

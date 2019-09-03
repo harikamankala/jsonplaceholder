@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import constants.Constants;
+import io.restassured.response.Response;
 import pojo.User;
 import java.io.IOException;
 import java.util.List;
@@ -14,6 +15,7 @@ public class GetUsers extends AbstractBaseAPI{
 	
 	public void getUsersAPI() {
 		response = given().get(Constants.GET_USERS).andReturn();
+		setResponse(response);
 	}
 
 	public int getUsersAPIResponseCode() {
@@ -26,4 +28,10 @@ public class GetUsers extends AbstractBaseAPI{
 		User user = usersList.stream().filter(element -> element.getUsername().equals(userName)).findFirst().orElse(null);
 		return user.getId();
 	}
+	
+	public Response getUserByIdAPI(String userId) {
+		return response = given().get(Constants.GET_USERS + Constants.SLASH + userId).andReturn();
+	}
+	
+	
 }

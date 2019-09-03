@@ -1,6 +1,5 @@
 package test;
 
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
@@ -20,7 +19,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import org.apache.commons.validator.routines.EmailValidator;
 
-public class AllTests {
+public class ValidateEmailFormatTest {
 	
 	GetUsers getUsers = new GetUsers();
 	GetPostsByUserId getPostsByUserId = new GetPostsByUserId();
@@ -36,10 +35,10 @@ public class AllTests {
 		getUsers.getUsersAPI();
 		assertThat("Verify GET /users API Response code", getUsers.getUsersAPIResponseCode(), equalTo(200));
 		Reporter.log("userId of Samantha : " + getUsers.getUserIdOfUser("Samantha"));	
-		getPostsByUserId.getPostsByUserIdAPI(getUsers.getUserIdOfUser("Samantha"));
+		getPostsByUserId.getPostsByUserIdAPI(String.valueOf(getUsers.getUserIdOfUser("Samantha")));
 		Reporter.log("List of Post Ids : " + getPostsByUserId.getPostIdsOfUser());
 		for(int postId : getPostsByUserId.getPostIdsOfUser()) {
-			getCommentsByPostId.getCommentsByPostIdAPI(postId);
+			getCommentsByPostId.getCommentsByPostIdAPI(String.valueOf(postId));
 			List<String> emails = getCommentsByPostId.getEmailsFromCommentsOfPost();			
 			for(String email : emails) {
 				EmailValidator validator = EmailValidator.getInstance();
