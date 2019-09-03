@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import constants.Constants;
+import io.restassured.response.Response;
 import pojo.Comment;
 import java.io.IOException;
 import java.util.List;
@@ -13,8 +14,10 @@ import java.util.stream.Collectors;
 
 public class GetCommentsByPostId extends AbstractBaseAPI{
 	
-	public void getCommentsByPostIdAPI(int postId) {
+	public Response getCommentsByPostIdAPI(String postId) {
 		response = given().get(Constants.GET_COMMENTS_BY_POSTID + postId).andReturn();
+		setResponse(response);
+		return response;
 	}
 
 	public int getCommentsByPostIdAPIResponseCode() {

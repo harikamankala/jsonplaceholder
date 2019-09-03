@@ -6,16 +6,18 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import constants.Constants;
+import io.restassured.response.Response;
 import pojo.Post;
-import pojo.User;
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class GetPostsByUserId extends AbstractBaseAPI{
 	
-	public void getPostsByUserIdAPI(int userId) {
+	public Response getPostsByUserIdAPI(String userId) {
 		response = given().get(Constants.GET_POSTS_BY_USERID + userId).andReturn();
+		setResponse(response);
+		return response;
 	}
 
 	public int getPostsByUserIdAPIResponseCode() {
