@@ -15,7 +15,6 @@ public class GetUsers extends AbstractBaseAPI{
 	
 	public void getUsersAPI() {
 		response = given().get(Constants.GET_USERS).andReturn();
-		setResponse(response);
 	}
 
 	public int getUsersAPIResponseCode() {
@@ -24,7 +23,9 @@ public class GetUsers extends AbstractBaseAPI{
 	}
 	
 	public int getUserIdOfUser(String userName) throws JsonParseException, JsonMappingException, IOException {		
-		List<User> usersList = getObjectMapper().readValue(getResponse().getBody().asString(), new TypeReference<List<User>>(){});		
+		List<User> usersList = getObjectMapper().readValue(getResponse().getBody().asString(), new TypeReference<List<User>>(){});	
+		
+		//finding user whose name matches with the userName from a list of users
 		User user = usersList.stream().filter(element -> element.getUsername().equals(userName)).findFirst().orElse(null);
 		return user.getId();
 	}

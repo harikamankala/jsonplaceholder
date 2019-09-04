@@ -16,7 +16,6 @@ public class GetPostsByUserId extends AbstractBaseAPI{
 	
 	public Response getPostsByUserIdAPI(String userId) {
 		response = given().get(Constants.GET_POSTS_BY_USERID + userId).andReturn();
-		setResponse(response);
 		return response;
 	}
 
@@ -26,7 +25,9 @@ public class GetPostsByUserId extends AbstractBaseAPI{
 	}
 	
 	public List<Integer> getPostIdsOfUser() throws JsonParseException, JsonMappingException, IOException {		
-		List<Post> postsList = getObjectMapper().readValue(getResponse().getBody().asString(), new TypeReference<List<Post>>(){});		
+		List<Post> postsList = getObjectMapper().readValue(getResponse().getBody().asString(), new TypeReference<List<Post>>(){});	
+		
+		//Collecting post ids from the list of post objects
 		List<Integer> postIds = postsList.stream().map(Post::getId).collect(Collectors.toList());
 		return postIds;
 	}

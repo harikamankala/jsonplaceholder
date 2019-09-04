@@ -42,12 +42,12 @@ public class GetCommentsByPostIdTest extends AbstractBaseAPI{
 	@Test(testName = "Invalid postId (No user with the given Id)")
 	public void verifyGetCommentsByPostIdAPI_Invalid() throws JsonParseException, JsonMappingException, IOException{		
 		response = getCommentsByPostId.getCommentsByPostIdAPI("600");
-		assertThat("Verify GET /comments?postId=postId API Response code", getCommentsByPostId.getCommentsByPostIdAPIResponseCode(), equalTo(404));				
+		assertThat("Verify GET /comments?postId=postId API Response code", getCommentsByPostId.getCommentsByPostIdAPIResponseCode(), equalTo(Constants.NOT_FOUND_CODE));				
 	}
 	
 	@Test(testName = "Bad postId")
 	public void verifyGetCommentsByPostIdAPI_BadData() throws JsonParseException, JsonMappingException, IOException{		
 		response = getCommentsByPostId.getCommentsByPostIdAPI("abc");
-		assertThat("Verify GET /comments?postId=postId API Response code", getCommentsByPostId.getCommentsByPostIdAPIResponseCode(), equalTo(404));			
+		assertThat("Verify GET /comments?postId=postId API Response code", getCommentsByPostId.getCommentsByPostIdAPIResponseCode(), equalTo(Constants.BAD_REQUEST_CODE));			
 	}
 }

@@ -40,12 +40,12 @@ public class GetUserDetailsTest extends AbstractBaseAPI{
 	@Test(testName = "Invalid userId (No user with the given Id)")
 	public void verifyGetUserDetailsByIdAPI_Invalid() throws JsonParseException, JsonMappingException, IOException{		
 		response = getUsers.getUserByIdAPI("20");
-		assertThat("Verify GET /users API Response code", getUsers.getUsersAPIResponseCode(), equalTo(404));				
+		assertThat("Verify GET /users API Response code", getUsers.getUsersAPIResponseCode(), equalTo(Constants.NOT_FOUND_CODE));				
 	}
 	
 	@Test(testName = "Bad userId")
 	public void verifyGetUserDetailsByIdAPI_BadData() throws JsonParseException, JsonMappingException, IOException{		
 		response = getUsers.getUserByIdAPI("abc");
-		assertThat("Verify GET /users API Response code", getUsers.getUsersAPIResponseCode(), equalTo(404));			
+		assertThat("Verify GET /users API Response code", getUsers.getUsersAPIResponseCode(), equalTo(Constants.NOT_FOUND_CODE));			
 	}
 }

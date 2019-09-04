@@ -42,12 +42,12 @@ public class GetPostsByUserIdTest extends AbstractBaseAPI{
 	@Test(testName = "Invalid userId (No user with the given Id)")
 	public void verifyGetPostsByUserIdAPI_Invalid() throws JsonParseException, JsonMappingException, IOException{		
 		getPostsByUserId.getPostsByUserIdAPI("20");
-		assertThat("Verify GET /posts?userId=userId API Response code", getPostsByUserId.getPostsByUserIdAPIResponseCode(), equalTo(404));				
+		assertThat("Verify GET /posts?userId=userId API Response code", getPostsByUserId.getPostsByUserIdAPIResponseCode(), equalTo(Constants.NOT_FOUND_CODE));				
 	}
 	
 	@Test(testName = "Bad userId")
 	public void verifyGetPostsByUserIdAPI_BadData() throws JsonParseException, JsonMappingException, IOException{		
 		getPostsByUserId.getPostsByUserIdAPI("abc");
-		assertThat("Verify GET /posts?userId=userId API Response code", getPostsByUserId.getPostsByUserIdAPIResponseCode(), equalTo(404));			
+		assertThat("Verify GET /posts?userId=userId API Response code", getPostsByUserId.getPostsByUserIdAPIResponseCode(), equalTo(Constants.BAD_REQUEST_CODE));			
 	}
 }

@@ -16,7 +16,6 @@ public class GetCommentsByPostId extends AbstractBaseAPI{
 	
 	public Response getCommentsByPostIdAPI(String postId) {
 		response = given().get(Constants.GET_COMMENTS_BY_POSTID + postId).andReturn();
-		setResponse(response);
 		return response;
 	}
 
@@ -27,6 +26,8 @@ public class GetCommentsByPostId extends AbstractBaseAPI{
 	
 	public List<String> getEmailsFromCommentsOfPost() throws JsonParseException, JsonMappingException, IOException {		
 		List<Comment> commentsList = getObjectMapper().readValue(getResponse().getBody().asString(), new TypeReference<List<Comment>>(){});		
+		
+		//Collecting emails from list of Comment objects
 		List<String> emails = commentsList.stream().map(Comment::getEmail).collect(Collectors.toList());
 		return emails;
 	}
