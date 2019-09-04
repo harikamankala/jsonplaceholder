@@ -1,16 +1,13 @@
-version: 2
-jobs:
-  build:
-    docker:
-      - image: debian:stretch
+dependencies:
+  override:
+    - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
 
-    steps:
-      - checkout
+test:
+  override:
+    - mvn -o surefire:test
 
-      - run:
-          name: Run tests
-          command: mvn clean install
-
-      - run:
-          name: Print the Current Time
-          command: date
+deployment:
+  main:
+    branch: master
+    commands:
+      - mvn -s .circleci.settings.xml -DskipTests deploy
