@@ -1,13 +1,21 @@
-dependencies:
-  override:
-    - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
+version: 2
+ jobs:
+   build:
+     docker:
+       - image: circleci/ruby:2.4.1
+     steps:
+       - checkout
 
-test:
-  override:
-    - mvn -o surefire:test
+      dependencies:
+        override:
+          - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
 
-deployment:
-  main:
-    branch: master
-    commands:
-      - mvn -s .circleci.settings.xml -DskipTests deploy
+      test:
+        override:
+          - mvn -o surefire:test
+
+      deployment:
+        main:
+          branch: master
+          commands:
+            - mvn -s .circleci.settings.xml -DskipTests deploy
