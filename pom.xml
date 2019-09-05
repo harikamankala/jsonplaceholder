@@ -37,15 +37,7 @@
 		   <version>1.6</version>
 	  </dependency>
   </dependencies>
-   <build>
-	   <extensions>
-			<extension>
-				<groupId>io.packagecloud.maven.wagon</groupId>
-				<artifactId>maven-packagecloud-wagon</artifactId>
-				<version>0.0.4</version>
-			</extension>
-		</extensions>
-		<distributionManagement>
+  <distributionManagement>
 		  <repository>
 		    <id>packagecloud-harika</id>
 		    <url>packagecloud+https://packagecloud.io/harika/core</url>
@@ -55,6 +47,14 @@
 		    <url>packagecloud+https://packagecloud.io/harika/core</url>
 		  </snapshotRepository>
 		</distributionManagement>
+   <build>
+	   <extensions>
+			<extension>
+				<groupId>io.packagecloud.maven.wagon</groupId>
+				<artifactId>maven-packagecloud-wagon</artifactId>
+				<version>0.0.4</version>
+			</extension>
+		</extensions>		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
