@@ -1,21 +1,28 @@
 version: 2
- jobs:
-   build:
-     docker:
-       - image: circleci/ruby:2.4.1
-     steps:
-       - checkout
+jobs:
+  build:
+    
+    working_directory: ~/jsonplaceholder
 
-      dependencies:
-        override:
-          - mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
 
-      test:
-        override:
-          - mvn -o surefire:test
+    steps:
 
-      deployment:
-        main:
-          branch: master
-          commands:
-            - mvn -s .circleci.settings.xml -DskipTests deploy
+      - checkout
+         
+      - run: mvn dependency:go-offline
+      
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: circleci-demo-java-spring-{{ checksum "pom.xml" }}
+      
+      - run: mvn clean install
+      
+      - store_test_results:
+          path: target/surefire-reports
+      
+      - store_artifacts:
+          path: target/demo-java-spring-0.0.1-SNAPSHOT.jar
+
