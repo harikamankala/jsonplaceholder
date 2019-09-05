@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -39,12 +40,14 @@ public class GetPostsByUserIdTest extends AbstractBaseAPI{
 		assertThat("Verify User Posts", actualPosts.equals(expectedPosts));		
 	}
 	
+	@Ignore
 	@Test(testName = "Invalid userId (No user with the given Id)")
 	public void verifyGetPostsByUserIdAPI_Invalid() throws JsonParseException, JsonMappingException, IOException{		
 		getPostsByUserId.getPostsByUserIdAPI("20");
 		assertThat("Verify GET /posts?userId=userId API Response code", getPostsByUserId.getPostsByUserIdAPIResponseCode(), equalTo(Constants.NOT_FOUND_CODE));				
 	}
 	
+	@Ignore
 	@Test(testName = "Bad userId")
 	public void verifyGetPostsByUserIdAPI_BadData() throws JsonParseException, JsonMappingException, IOException{		
 		getPostsByUserId.getPostsByUserIdAPI("abc");
